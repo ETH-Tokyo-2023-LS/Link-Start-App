@@ -7,6 +7,7 @@ import { goerli } from "@wagmi/core/chains";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { Footer } from "@/components/FooterTab";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { publicEnv } from "../env";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [goerli],
@@ -22,7 +23,7 @@ const client = createClient({
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <WagmiConfig client={client}>
-      <GoogleOAuthProvider clientId="1071348522014-3qq1ln33ful535dnd8r4f6f9vtjrv2nu.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={publicEnv.googleAuthClientId}>
         <Component {...pageProps} />
         {router.pathname === "/" ? null : <Footer />}
       </GoogleOAuthProvider>
