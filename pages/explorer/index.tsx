@@ -76,7 +76,7 @@ const Explorer = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CardList items={items} />
       </div>
-      <div className="gcse-search text-gray-700" />
+      <div className="gcse-search" />
     </div>
   );
 };

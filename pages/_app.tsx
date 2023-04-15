@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+import "@/styles/gcse-style.css";
+
 import type { AppProps } from "next/app";
 
 import { configureChains, WagmiConfig, createClient, useAccount } from "wagmi";
