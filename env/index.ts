@@ -7,6 +7,8 @@ export const publicEnv = {
   bundlerUrl: process.env.NEXT_PUBLIC_BUNDLER_URL ?? "",
   rpcUrl: process.env.NEXT_PUBLIC_RPC_URL ?? "",
   paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL ?? "",
+  relayApiUrl: process.env.NEXT_PUBLIC_LIT_RELAY_API_URL ?? "",
+  relayApiKey: process.env.NEXT_PUBLIC_LIT_RELAY_API_KEY ?? "",
 };
 
 export const serverEnv = (() => {

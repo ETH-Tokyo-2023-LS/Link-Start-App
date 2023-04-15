@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../components/IconButton";
 import { createAccountForPKP, sendTxForPKP } from "../utils/pkp";
+import { publicEnv } from "../env";
 
 type CredentialResponse = any;
-
-const RELAY_API_URL = process.env.REACT_APP_RELAY_API_URL || "";
-const RELAY_API_KEY = process.env.REACT_APP_RELAY_API_KEY || "";
 
 export default function Wallet() {
   const [registeredPkpEthAddress, setRegisteredPkpEthAddress] =
@@ -136,11 +134,11 @@ async function mintPkpUsingRelayerGoogleAuthVerificationEndpoint(
 ) {
   setStatusFn("Minting PKP with relayer...");
 
-  const mintRes = await fetch(`${RELAY_API_URL}/auth/google`, {
+  const mintRes = await fetch(`${publicEnv.relayApiUrl}/auth/google`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "api-key": RELAY_API_KEY,
+      "api-key": publicEnv.relayApiKey,
     },
     body: JSON.stringify({
       idToken: credentialResponse.credential,
@@ -178,10 +176,10 @@ async function pollRequestUntilTerminalState(
   for (let i = 0; i < maxPollCount; i++) {
     setStatusFn(`Waiting for auth completion (poll #${i + 1})`);
     const getAuthStatusRes = await fetch(
-      `${RELAY_API_URL}/auth/status/${requestId}`,
+      `${publicEnv.relayApiUrl}/auth/status/${requestId}`,
       {
         headers: {
-          "api-key": RELAY_API_KEY,
+          "api-key": publicEnv.relayApiKey,
         },
       }
     );
