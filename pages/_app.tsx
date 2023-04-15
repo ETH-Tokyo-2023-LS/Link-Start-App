@@ -6,6 +6,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { polygonMumbai } from "@wagmi/core/chains";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { Footer } from "@/components/FooterTab";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [polygonMumbai],
@@ -21,8 +22,10 @@ const client = createClient({
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <WagmiConfig client={client}>
-      <Component {...pageProps} />
-      {router.pathname === "/" ? null : <Footer />}
+      <GoogleOAuthProvider clientId="1071348522014-3qq1ln33ful535dnd8r4f6f9vtjrv2nu.apps.googleusercontent.com">
+        <Component {...pageProps} />
+        {router.pathname === "/" ? null : <Footer />}
+      </GoogleOAuthProvider>
     </WagmiConfig>
   );
 }
