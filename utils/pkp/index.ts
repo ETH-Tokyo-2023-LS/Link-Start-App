@@ -2,9 +2,9 @@ import * as LitJsSdk from "@lit-protocol/lit-node-client";
 import { SimpleAccountAPI, PaymasterAPI } from "@account-abstraction/sdk";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { ethers } from "ethers";
-import config from "../../config.json";
-import { PKPWallet } from "./signer";
 import { getVerifyingPaymaster, getGasFee, getHttpRpcClient } from "../stackup";
+import { PKPWallet } from "./signer";
+import config from "../../config.json";
 
 export const getSimpleAccountForPKP = async (
   provider: JsonRpcProvider,

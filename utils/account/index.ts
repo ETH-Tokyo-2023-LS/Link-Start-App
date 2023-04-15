@@ -7,9 +7,8 @@ import {
   ERC20_ABI,
 } from "../stackup";
 import { ethers } from "ethers";
-// @ts-ignore
-import config from "../../config.json";
 import { sendRestApi } from "../sendRestApi";
+import config from "../../config.json";
 
 export const createAccount = async () => {
   const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);

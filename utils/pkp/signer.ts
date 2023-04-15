@@ -41,16 +41,8 @@ import {
   UnsignedTransaction,
 } from "@ethersproject/transactions";
 import { Wordlist } from "@ethersproject/wordlists";
-
-// -- For node.js only (default for debugging) --
-// import * as LitJsSdk from "lit-js-sdk/build/index.node.js";
-
-// -- For React etc, use the following instead --
-// @ts-ignore
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
-
 import { Logger } from "@ethersproject/logger";
-
 import { ethers } from "ethers";
 
 export const version = "wallet/5.7.0";

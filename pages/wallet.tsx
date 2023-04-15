@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { createAccountForPKP, sendTxForPKP } from "../utils/pkp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconButton } from "../components/IconButton";
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-
 import { GoogleLogin } from "@react-oauth/google";
-import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { IconButton } from "../components/IconButton";
+import { createAccountForPKP, sendTxForPKP } from "../utils/pkp";
 
 type CredentialResponse = any;
 
@@ -225,32 +223,3 @@ async function pollRequestUntilTerminalState(
   // at this point, polling ended and still no success, set failure status
   setStatusFn(`Hmm this is taking longer than expected...`);
 }
-
-const handleAction = async (pkpPublicKey: string) => {
-  const litActionCode = `
-const go = async () => {
-  // this requests a signature share from the Lit Node
-  // the signature share will be automatically returned in the HTTP response from the node
-  // all the params (toSign, publicKey, sigName) are passed in from the LitJsSdk.executeJs() function
-  const sigShare = await Lit.Actions.signEcdsa({ toSign, publicKey , sigName });
-};
-
-go();
-`;
-  const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: "goerli" });
-
-  const litNodeClient = new LitJsSdk.LitNodeClient({ litNetwork: "serrano" });
-  await litNodeClient.connect();
-  const signatures = await litNodeClient.executeJs({
-    code: litActionCode,
-    authSig,
-    // all jsParams can be used anywhere in your litActionCode
-    jsParams: {
-      // this is the string "Hello World" for testing
-      toSign: [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100],
-      publicKey: pkpPublicKey,
-      sigName: "sig1",
-    },
-  });
-  console.log("signatures: ", signatures);
-};
