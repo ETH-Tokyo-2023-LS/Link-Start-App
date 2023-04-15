@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { MobileHeader } from "@/components/MobileHeader";
 
 type CardItemProps = {
@@ -49,6 +49,12 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
 };
 
 const Explorer = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    document.head.append(script);
+    script.src = "https://cse.google.com/cse.js?cx=042edb19600834d6a";
+  }, []);
+
   const items = [
     {
       imageSrc: "/uniswap.jpeg",
@@ -67,10 +73,10 @@ const Explorer = () => {
   return (
     <div className="max-w">
       <MobileHeader title="Explorer" />
-
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CardList items={items} />
       </div>
+      <div className="gcse-search" />
     </div>
   );
 };
