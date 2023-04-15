@@ -4,22 +4,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../components/IconButton";
 import { createAccountForPKP, sendTxForPKP } from "../utils/pkp";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { publicEnv } from "../env";
 
 type CredentialResponse = any;
 
 export default function Wallet() {
-  const [registeredPkpEthAddress, setRegisteredPkpEthAddress] =
-    useState<string>("");
+  const [registeredPkpEthAddress, setRegisteredPkpEthAddress] = useLocalStorage(
+    "registeredPkpEthAddress",
+    ""
+  );
   const [googleCredentialResponse, setGoogleCredentialResponse] =
-    useState<CredentialResponse | null>(null);
+    useLocalStorage<CredentialResponse | null>(
+      "googleCredentialResponse",
+      null
+    );
   const [registeredPkpPublicKey, setRegisteredPkpPublicKey] =
-    useState<string>("");
+    useLocalStorage<string>("registeredPkpPublicKey", "");
   const [authenticatedPkpPublicKey, setAuthenticatedPkpPublicKey] =
-    useState<string>("");
+    useLocalStorage<string>("authenticatedPkpPublicKey", "");
   const [status, setStatus] = useState("");
 
-  const [myAddress, setMyAddress] = useState("");
+  const [aaConuractAddress, setAaConuractAddress] = useLocalStorage(
+    "aaConuractAddress",
+    ""
+  );
   const [toAddress, setToAddress] = useState("");
   const [value, setValue] = useState(0);
   const [hash, setHash] = useState("");
@@ -32,9 +41,20 @@ export default function Wallet() {
         registeredPkpPublicKey,
         googleCredentialResponse.credential
       );
-      setMyAddress(result);
+      setAaConuractAddress(result);
     })();
   }, [registeredPkpPublicKey, googleCredentialResponse]);
+
+  const signout = () => {
+    setGoogleCredentialResponse(null);
+    setRegisteredPkpEthAddress("");
+    setRegisteredPkpPublicKey("");
+    setAuthenticatedPkpPublicKey("");
+    setAaConuractAddress("");
+    setToAddress("");
+    setValue(0);
+    setHash("");
+  };
 
   const withdrawETH = async (to: string, value: number) => {
     if (!registeredPkpPublicKey) return;
@@ -93,37 +113,46 @@ export default function Wallet() {
         useOneTap
       />
       {registeredPkpEthAddress && (
-        <div>Registered PKP Eth Address: {registeredPkpEthAddress}</div>
+        <div>
+          Registered PKP Eth Address (Lit Protocol):
+          <p className="white">{registeredPkpEthAddress}</p>
+        </div>
       )}
-
       {/*<button onClick={() => handleAction(registeredPkpPublicKey)}>
         Encrypt with Lit
       </button> */}
-
-      <div>wallet page</div>
-      <p className="text-gray-600">{myAddress}</p>
-      <p className="text-gray-600">{hash}</p>
-
+      {aaConuractAddress && (
+        <div>
+          My AA wallet address:
+          <p className="white">{aaConuractAddress}</p>
+        </div>
+      )}
+      {hash && (
+        <div>
+          hash:
+          <p className="white">{hash}</p>
+        </div>
+      )}
       <input
         type="text"
         value={toAddress}
         onChange={handleToAddressChange}
         className="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:border-blue-500 transition-colors"
       />
-
       <input
         type="number"
         value={value}
         onChange={handleValueChange}
         className="w-full py-2 px-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:border-blue-500 transition-colors"
       />
-
       <IconButton
         icon={<FontAwesomeIcon icon={faExchangeAlt} />}
         title="Withdraw"
         subTitle="ETH"
         onClick={() => withdrawETH(toAddress, value)}
       />
+
+      <button onClick={signout}>signout</button>
     </>
   );
 }
