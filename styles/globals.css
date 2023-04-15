@@ -25,3 +25,68 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.door-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+@keyframes doorOpenLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes doorOpenRight {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.left-door,
+.right-door {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  background-color: #ccc;
+  z-index: 10000;
+}
+
+.left-door {
+  top: 0;
+  left: 0;
+  animation: doorOpenLeft 2s forwards;
+}
+
+.right-door {
+  top: 0;
+  right: 0;
+  animation: doorOpenRight 2s forwards;
+}
+
+@keyframes zoomOut {
+  0% {
+    /* transform: translate(50%, 0%); */
+    /* transform: scale(1, 1); */
+  }
+  100% {
+    /* transform: scale(2, 2); */
+    /* transform: scale(4); */
+    opacity: 0;
+  }
+}
+
+.zoom-out {
+  animation: zoomOut 3s forwards;
+}
