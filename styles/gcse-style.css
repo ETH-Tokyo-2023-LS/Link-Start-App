@@ -1,0 +1,123 @@
+#searchform-large02 .gsc-control-cse {
+  background-color: #fff !important;
+  border: none !important;
+}
+
+/* テキストボックスに文字入力したときに出る「×」マークの位置調整用の指定 */
+#searchform-large02 .gsc-search-box {
+  position: relative;
+}
+
+/* テキストボックスとボタンを縦並びにするため
+    テーブル内の要素をblock化する */
+#searchform-large02 .gsc-search-box tr,
+#searchform-large02 .gsc-search-box td {
+  display: block;
+}
+
+#searchform-large02 .gsc-search-box td {
+  width: 100%;
+  vertical-align: top;
+}
+
+/* 検索キーワード入力欄の外観を指定 */
+#searchform-large02 .gsc-search-box .gsc-input #gs_tti50 input {
+  height: 50px !important;
+  margin-bottom: 15px !important;
+  vertical-align: top;
+  border: 1px solid #ccc !important;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  color: #000;
+}
+
+#___gcse_0 {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.gsc-input {
+  color: #000;
+}
+
+#searchform-large02 .gsc-search-box .gsib_a {
+  padding: 0 !important;
+}
+
+#searchform-large02 .gsc-search-box td#gs_tti51 {
+  margin-bottom: 5px;
+}
+
+#searchform-large02 .gsc-search-box td.gsc-search-button {
+  height: 50px;
+}
+
+/* テキストボックスに文字入力したときに出る「×」マークの位置調整 */
+#searchform-large02 .gsc-search-box .gsib_b {
+  position: absolute;
+  width: 20px;
+  top: 5px;
+  right: 10px;
+}
+
+/* テキストボックスのデザイン設定 */
+#searchform-large02 .gsc-search-box input#gsc-i-id2 {
+  box-sizing: border-box;
+  height: 50px;
+  padding: 10px !important;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(200, 200, 200, 0.4) inset;
+  -moz-box-shadow: 2px 2px 2px 0 rgba(200, 200, 200, 0.4) inset;
+  box-shadow: 2px 2px 2px 0 rgba(200, 200, 200, 0.4) inset;
+  background-position: 5px center !important;
+}
+
+/* デフォルトで設定されている(疑似的な)テキストボックスの
+    デザイン設定を解除 */
+#searchform-large02 .gsc-search-box .gsc-input-box,
+#searchform-large02 .gsc-search-box .gsc-input-box-hover,
+#searchform-large02 .gsc-search-box .gsc-input-box-focus {
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* 検索ボタンの背景をボタンのように見せかける */
+#searchform-large02 .gsc-search-box .gsc-search-button {
+  position: relative;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-top: 1px solid #774063;
+  border-left: 1px solid #774063;
+  border-right: 1px solid #2c041e;
+  border-bottom: 1px solid #2c041e;
+  background: #3a0527 url(/img2/icon_handglass_27x27_dark.png) 96% center
+    no-repeat;
+  cursor: pointer;
+}
+
+/* 検索ボタンの背景部分にテキストを表示させる */
+#searchform-large02 .gsc-search-box .gsc-search-button:before {
+  position: absolute;
+  top: 38%;
+  left: 38%;
+  content: ‘キーワード検索’ !important;
+  color: #000;
+  font-size: 16px;
+}
+
+/* 検索ボタンを透明化し背景のみを表示させる */
+#searchform-large02 .gsc-search-box button.gsc-search-button-v2,
+#searchform-large02 .gsc-search-box button.gsc-search-button {
+  width: 100%;
+  height: 50px;
+  padding: 0 !important;
+  opacity: 0;
+}
