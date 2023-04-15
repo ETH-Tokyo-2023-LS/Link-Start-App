@@ -24,6 +24,7 @@ import { createAccountForPKP, sendTxForPKP } from "../utils/pkp";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { getNativeAssetBalanceForAlchemy } from "../utils/alchemy";
 import { ethers } from "ethers";
+import { MobileHeader } from "@/components/MobileHeader";
 
 type CredentialResponse = any;
 
@@ -147,6 +148,7 @@ export default function Wallet() {
 
   return (
     <Stack w="100%" alignItems="center" justifyContent="center">
+      <MobileHeader />
       <Stack
         spacing="4"
         maxW="1000px"
