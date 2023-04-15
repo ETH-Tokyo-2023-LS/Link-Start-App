@@ -1,0 +1,46 @@
+/* styles.css */
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f0f0;
+}
+
+.door {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+}
+
+.left,
+.right {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #6c757d;
+  border: 1px solid #5a6268;
+  box-sizing: border-box;
+}
+
+.left {
+  transform-origin: left center;
+  transition: transform 1s;
+}
+
+.right {
+  transform-origin: right center;
+  transition: transform 1s;
+}
+
+.open .left {
+  transform: rotateY(-120deg);
+}
+
+.open .right {
+  transform: rotateY(120deg);
+}
