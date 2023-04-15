@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import React, { useEffect } from "react";
-import { MobileHeader } from "@/components/MobileHeader";
 
 type CardItemProps = {
   imageSrc: string;
@@ -71,8 +70,7 @@ const Explorer = () => {
   ];
 
   return (
-    <div className="max-w">
-      <MobileHeader title="Explorer" />
+    <div className="max-w mt-8">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CardList items={items} />
       </div>

@@ -1,4 +1,3 @@
-import { MobileHeader } from "@/components/MobileHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faExchangeAlt,
@@ -43,9 +42,7 @@ const Action = () => {
   };
 
   return (
-    <div className="max-w">
-      <MobileHeader title="Action" />
-
+    <div className="max-w mt-4">
       <div className="grid grid-cols-2 gap-4 p-4">
         <IconButton
           icon={<FontAwesomeIcon icon={faExchangeAlt} />}

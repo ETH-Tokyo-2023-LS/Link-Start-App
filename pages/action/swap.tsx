@@ -24,8 +24,6 @@ import {
 import React, { useState } from "react";
 import { Token } from "@uniswap/sdk-core";
 import { Pool } from "@uniswap/v3-sdk";
-import { MobileHeader } from "@/components/MobileHeader";
-import { Num2FracStr } from "@/utils/num2FracStr";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -361,9 +359,7 @@ export const SwapComponent: React.FC<SwapComponentProps> = ({
 
 const Swap = () => {
   return (
-    <div className="max-w">
-      <MobileHeader title="Swap" />
-
+    <div className="max-w mt-8">
       <SwapComponent currency1Label="WETH" currency2Label="UNI" />
     </div>
   );
