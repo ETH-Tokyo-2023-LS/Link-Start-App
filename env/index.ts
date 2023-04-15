@@ -7,8 +7,6 @@ export const publicEnv = {
   bundlerUrl: process.env.NEXT_PUBLIC_BUNDLER_URL ?? "",
   rpcUrl: process.env.NEXT_PUBLIC_RPC_URL ?? "",
   paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL ?? "",
-  // entryPoint: "0x0576a174D229E3cFA37253523E645A78A0C91B57",
-  // simpleAccountFactory: "0x71D63edCdA95C61D6235552b5Bc74E32d8e2527B",
 };
 
 export const serverEnv = (() => {
