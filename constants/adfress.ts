@@ -1,2 +1,8 @@
 export const UNI_V3_FACTORY_ADDRESS =
   "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+
+// uniswap router
+export const ROUTER_ADDRESS = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+
+// uniswap and weth in goerli
+export const POOL_ADDRESS = "0x07A4f63f643fE39261140DF5E613b9469eccEC86";

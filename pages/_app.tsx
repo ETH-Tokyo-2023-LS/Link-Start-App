@@ -3,12 +3,12 @@ import type { AppProps } from "next/app";
 
 import { configureChains, WagmiConfig, createClient, useAccount } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { polygonMumbai } from "@wagmi/core/chains";
+import { goerli } from "@wagmi/core/chains";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { Footer } from "@/components/FooterTab";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [polygonMumbai],
+  [goerli],
   [publicProvider()]
 );
 const client = createClient({
