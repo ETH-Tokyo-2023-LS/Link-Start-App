@@ -55,9 +55,9 @@ const Action = () => {
         />
         <IconButton
           icon={<FontAwesomeIcon icon={faPalette} />}
-          title="Trade(NFT)"
+          title="NFT"
           subTitle="powered by opensea"
-          onClick={() => handleButtonClick("Trade")}
+          onClick={() => handleButtonClick("nft")}
         />
         <IconButton
           icon={<FontAwesomeIcon icon={faQrcode} />}
