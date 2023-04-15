@@ -50,7 +50,7 @@ const Action = () => {
         <IconButton
           icon={<FontAwesomeIcon icon={faExchangeAlt} />}
           title="Swap(FT)"
-          subTitle="powered by uniswap"
+          subTitle="powered by Uniswap"
           onClick={() => handleButtonClick("swap")}
         />
         <IconButton
