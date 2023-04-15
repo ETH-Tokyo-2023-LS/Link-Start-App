@@ -12,7 +12,7 @@ import { publicEnv, serverEnv } from "../../env";
 import config from "../../config.json";
 
 export const createAccount = async () => {
-  const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+  const provider = new ethers.providers.JsonRpcProvider(publicEnv.rpcUrl);
   const accountAPI = getSimpleAccount(
     provider,
     serverEnv.signingKey,
