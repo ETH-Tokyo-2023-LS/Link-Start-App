@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BigNumber, ethers } from "ethers";
 
 import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json";
-import ISwapRouterABI from "@uniswap/v3-periphery/artifacts/contracts/interfaces/ISwapRouter.sol/ISwapRouter.json";
 import IUniswapV2ERC20 from "@uniswap/v2-core/build/IUniswapV2ERC20.json";
 
 import { Token } from "@uniswap/sdk-core";
@@ -14,12 +13,17 @@ import {
   MATIC_DECIMALS,
   MATIC_NAME,
   MATIC_SYMBOL,
+  UNI_ADDRESS,
   USDC_ADDRESS,
   USDC_DECIMALS,
   USDC_NAME,
   USDC_SYMBOL,
+  WETH_ADDRESS,
+  WETH_DECIMALS,
+  WETH_NAME,
+  WETH_SYMBOL,
 } from "@/constants/token";
-import { MUMBAI_CHAIN_ID } from "@/constants/chain";
+import { GOERLI_CHAIN_ID } from "@/constants/chain";
 
 const swapRouterABI = [
   {
@@ -90,7 +94,7 @@ const UniswapV3 = () => {
   // const [provider, setProvider] = useState<ethers.Wallet>();
   // const [signer, setSigner] = useState<ethers.Wallet>();
 
-  // const [weth, setWeth] = useState<Token>();
+  const [weth, setWeth] = useState<Token>();
   const [matic, setMatic] = useState<Token>();
   const [usdc, setUsdc] = useState<Token>();
   const [user, setUser] = useState<ethers.Wallet>();
@@ -117,17 +121,17 @@ const UniswapV3 = () => {
       // setProvider(_signer);
       // setSigner(_signer);
 
-      // const _weth = new Token(
-      //   MUMBAI_CHAIN_ID,
-      //   WETH_ADDRESS,
-      //   WETH_DECIMALS,
-      //   WETH_SYMBOL,
-      //   WETH_NAME
-      // );
-      // setWeth(_weth);
+      const _weth = new Token(
+        GOERLI_CHAIN_ID,
+        WETH_ADDRESS,
+        WETH_DECIMALS,
+        WETH_SYMBOL,
+        WETH_NAME
+      );
+      setWeth(_weth);
 
       const _matic = new Token(
-        MUMBAI_CHAIN_ID,
+        GOERLI_CHAIN_ID,
         MATIC_ADDRESS,
         MATIC_DECIMALS,
         MATIC_SYMBOL,
@@ -135,22 +139,22 @@ const UniswapV3 = () => {
       );
       setMatic(_matic);
 
-      const _usdc = new Token(
-        MUMBAI_CHAIN_ID,
-        USDC_ADDRESS,
-        USDC_DECIMALS,
-        USDC_SYMBOL,
-        USDC_NAME
-      );
-      setUsdc(_usdc);
+      // const _usdc = new Token(
+      //   GOERLI_CHAIN_ID,
+      //   USDC_ADDRESS,
+      //   USDC_DECIMALS,
+      //   USDC_SYMBOL,
+      //   USDC_NAME
+      // );
+      // setUsdc(_usdc);
     };
 
     init();
   }, []);
 
   const getTrade = async () => {
-    // if (!provider || !weth || !usdc || !user) return;
-    if (!provider || !matic || !usdc || !user) return;
+    if (!provider || !weth || !matic || !user) return;
+    // if (!provider || !matic || !usdc || !user) return;
 
     const uniV3FactoryABI = [
       "function getPool(address tokenA, address tokenB, uint24 fee) external view returns (address pool)",
@@ -162,9 +166,9 @@ const UniswapV3 = () => {
     );
 
     const uniV3PoolAddress = await uniV3Factory.getPool(
-      // WETH_ADDRESS,
-      USDC_ADDRESS,
-      MATIC_ADDRESS,
+      "0xcc7bb2d219a0fc08033e130629c2b854b7ba9195",
+      "0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6",
+      // ethers.utils.getAddress(USDC_ADDRESS),
       3000
     );
 
@@ -189,10 +193,12 @@ const UniswapV3 = () => {
         uniV3PoolContract.slot0(),
       ]);
 
+    console.log({ token0address, token1address, fee, liquidity, slot });
+
     const pool = new Pool(
-      // weth,
       matic,
-      usdc,
+      weth,
+      // usdc,
       fee,
       slot[0].toString(),
       liquidity.toString(),
@@ -209,12 +215,12 @@ const UniswapV3 = () => {
       provider
     );
 
-    const tokenContract0 = new ethers.Contract(
-      USDC_ADDRESS,
-      // WETH_ADDRESS,
-      IUniswapV2ERC20.abi,
-      provider
-    );
+    // const tokenContract = new ethers.Contract(
+    //   USDC_ADDRESS,
+    //   // WETH_ADDRESS,
+    //   IMumbaiUSDCABI.result,
+    //   provider
+    // );
 
     const amountIn = ethers.utils.parseUnits("100", USDC_DECIMALS);
     const amountOutMinimum = ethers.utils.parseUnits("1", MATIC_DECIMALS);
@@ -247,11 +253,16 @@ const UniswapV3 = () => {
       ...swapArgs,
       { gasPrice }
     );
-    console.log(tx);
+
+    //     const tokenContract0 = new ethers.Contract(
+    //       USDC_ADDRESS,
+    //       // WETH_ADDRESS,
+    //       IUniswapV2ERC20.abi,
+    //       provider
+    //     );
     // const approvalResponse = await tokenContract0
-    //   .connect(user)
-    //   .approve(swapRouterAddress, amountIn);
-    // console.log(approvalResponse);
+    //       .connect(user)
+    //       .approve(swapRouterAddress, amountIn);
     const gasLimit = await user.provider.estimateGas(tx);
     console.log({ gasLimit });
 
@@ -326,7 +337,7 @@ const UniswapV3 = () => {
 
   return (
     <div>
-      <h1>Uniswap V3 Polygon Mumbai Testnet Demo</h1>
+      <h1>Uniswap V3 Polygon goerli Testnet Demo</h1>
       <button onClick={getTrade}>Swap WETH for USDC</button>
     </div>
   );
