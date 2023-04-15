@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { getAddress } from "@ethersproject/address";
 import { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
 import {

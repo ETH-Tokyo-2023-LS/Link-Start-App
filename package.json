@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "clean": "rm -rf .next && rm -rf dist",
+    "dev": "env-cmd -f env/.env.local next dev -p 3000",
+    "build": "yarn clean && next build",
     "start": "next start",
+    "start:local": "env-cmd -f env/.env.local next start",
     "lint": "next lint",
     "killport": "kill-port --port 3000,3001,3002,5000,5001,8000,8080,8085,9099"
   },
@@ -45,6 +47,7 @@
     "wagmi": "^0.12.10"
   },
   "devDependencies": {
+    "env-cmd": "10.1.0",
     "kill-port": "1.6.1"
   }
 }

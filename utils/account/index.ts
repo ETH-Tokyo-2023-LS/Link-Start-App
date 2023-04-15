@@ -8,13 +8,14 @@ import {
 } from "../stackup";
 import { ethers } from "ethers";
 import { sendRestApi } from "../sendRestApi";
+import { publicEnv, serverEnv } from "../../env";
 import config from "../../config.json";
 
 export const createAccount = async () => {
   const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
   const accountAPI = getSimpleAccount(
     provider,
-    config.signingKey,
+    serverEnv.signingKey,
     config.entryPoint,
     config.simpleAccountFactory
   );
@@ -29,13 +30,13 @@ export const sendTx = async (
   data: string,
   withPaymaster: boolean
 ) => {
-  const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+  const provider = new ethers.providers.JsonRpcProvider(publicEnv.rpcUrl);
   const paymasterAPI = withPaymaster
-    ? getVerifyingPaymaster(config.paymasterUrl, config.entryPoint)
+    ? getVerifyingPaymaster(publicEnv.paymasterUrl, config.entryPoint)
     : undefined;
   const accountAPI = getSimpleAccount(
     provider,
-    config.signingKey,
+    serverEnv.signingKey,
     config.entryPoint,
     config.simpleAccountFactory,
     paymasterAPI
@@ -52,7 +53,7 @@ export const sendTx = async (
 
   const client = await getHttpRpcClient(
     provider,
-    config.bundlerUrl,
+    publicEnv.bundlerUrl,
     config.entryPoint
   );
   const uoHash = await client.sendUserOpToBundler(op);
@@ -89,7 +90,7 @@ export const sendERC20 = async (
   value: number,
   withPaymaster: boolean
 ) => {
-  const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+  const provider = new ethers.providers.JsonRpcProvider(publicEnv.rpcUrl);
   const token = ethers.utils.getAddress(tokenAddress);
   const to = ethers.utils.getAddress(toAddress);
   const erc20 = new ethers.Contract(token, ERC20_ABI, provider);

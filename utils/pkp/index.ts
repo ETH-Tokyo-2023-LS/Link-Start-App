@@ -4,6 +4,7 @@ import { JsonRpcProvider } from "@ethersproject/providers";
 import { ethers } from "ethers";
 import { getVerifyingPaymaster, getGasFee, getHttpRpcClient } from "../stackup";
 import { PKPWallet } from "./signer";
+import { publicEnv } from "../../env";
 import config from "../../config.json";
 
 export const getSimpleAccountForPKP = async (
@@ -41,7 +42,7 @@ export const getSimpleAccountForPKP = async (
   const pkpWallet = new PKPWallet({
     pkpPubKey,
     controllerAuthSig: sessionSigs.authSig,
-    provider: config.rpcUrl,
+    provider: publicEnv.rpcUrl,
   });
   await pkpWallet.init();
 
@@ -83,7 +84,7 @@ export const createAccountForPKP = async (
   pkpPubKey: string,
   credential?: any
 ) => {
-  const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+  const provider = new ethers.providers.JsonRpcProvider(publicEnv.rpcUrl);
   const accountAPI = await getSimpleAccountForPKP(
     provider,
     pkpPubKey,
@@ -104,9 +105,9 @@ export const sendTxForPKP = async (
   credential?: any,
   withPaymaster?: boolean
 ) => {
-  const provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+  const provider = new ethers.providers.JsonRpcProvider(publicEnv.rpcUrl);
   const paymasterAPI = withPaymaster
-    ? getVerifyingPaymaster(config.paymasterUrl, config.entryPoint)
+    ? getVerifyingPaymaster(publicEnv.paymasterUrl, config.entryPoint)
     : undefined;
   const accountAPI = await getSimpleAccountForPKP(
     provider,
@@ -128,7 +129,7 @@ export const sendTxForPKP = async (
 
   const client = await getHttpRpcClient(
     provider,
-    config.bundlerUrl,
+    publicEnv.bundlerUrl,
     config.entryPoint
   );
   const uoHash = await client.sendUserOpToBundler(op);
