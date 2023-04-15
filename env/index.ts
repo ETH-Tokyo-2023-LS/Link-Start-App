@@ -10,6 +10,11 @@ export const publicEnv = {
   paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL ?? "",
   relayApiUrl: process.env.NEXT_PUBLIC_LIT_RELAY_API_URL ?? "",
   relayApiKey: process.env.NEXT_PUBLIC_LIT_RELAY_API_KEY ?? "",
+  alchemy: {
+    mainnet: process.env.NEXT_PUBLIC_ALCHEMY_ETH_MAINNET_API_KEY ?? "",
+    goerli: process.env.NEXT_PUBLIC_ALCHEMY_ETH_GOERLI_API_KEY ?? "",
+    localhost: "",
+  },
 };
 
 export const serverEnv = (() => {
