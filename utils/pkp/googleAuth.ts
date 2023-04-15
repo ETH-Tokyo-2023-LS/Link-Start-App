@@ -1,7 +1,7 @@
 import { publicEnv } from "../../env";
 
 export const mintPkpUsingRelayerGoogleAuthVerificationEndpoint = async (
-  credentialResponse: any,
+  credential: string,
   setStatusFn: (status: string) => void
 ) => {
   setStatusFn("Minting PKP with relayer...");
@@ -13,7 +13,7 @@ export const mintPkpUsingRelayerGoogleAuthVerificationEndpoint = async (
       "api-key": publicEnv.relayApiKey,
     },
     body: JSON.stringify({
-      idToken: credentialResponse.credential,
+      idToken: credential,
     }),
   });
 
